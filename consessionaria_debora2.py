@@ -11,10 +11,13 @@ print("\n=== DADOS CADASTRADOS ===")
 for chave, valor in cadastro_cliente.items():
     print(f"{chave}: {valor}")
 
-tabela_veiculos = {
-    "FH 540": 85600.69,
-    "R450": 20900.47, 
-    "Actros 2651": 800000.00
+tabela_fipe = {
+    "FH 540": 85600,
+    "R450": 209004, 
+    "Actros 2651": 800000,
+    "24.280 Constellation": 375000,
+    "L-1620" : 168895,
+    "24-280" : 509000
 }
 
 veiculos_disp_aluguel=[
@@ -30,10 +33,10 @@ veiculos_disp_venda= [
 ]
 
 def menu():
-    print("\n===MENU===")
-    print("1 - Vender carro")
-    print("2 - Alugar carro")
-    print("3 - Comprar carro")
+    print("\n=== MENU ===")
+    print("1 - Vender caminhão")
+    print("2 - Alugar caminhão")
+    print("3 - Comprar caminhão")
     print("4 - Ver saldo")
     print("0 - Sair")
 
@@ -43,11 +46,11 @@ def venda_veiculo():
     modelo = input("DIgite o modelo do caminhão que deseja vender: ")
     marca = input("DIgite a marca do caminhão que deseja vender: ")
 
-    if modelo not in tabela_veiculos:
+    if modelo not in tabela_fipe:
         print("Infelizmente não compramos caminhões com essa descrição...")
         return 
     
-    valor_pre_definido = tabela_veiculos[modelo]
+    valor_pre_definido = tabela_fipe[modelo]
     proposta = valor_pre_definido *0.88
 
     print(f"\nValor de referência: R$ {valor_pre_definido:.2f}")
@@ -112,7 +115,7 @@ def comprar_veiculo():
     for i, veiculo in enumerate(veiculos_disp_venda):
         print(f"{i + 1} - {veiculo[0]} ({veiculo[1]})")
 
-    escolha = int(input("Escolha o número do caminhão que deseja: ")) - 1
+    escolha = int(input("\nEscolha o número do caminhão que deseja: ")) - 1
 
     if escolha < 0 or escolha >= len(veiculos_disp_venda):
         print("Opção inválida.")
@@ -120,7 +123,7 @@ def comprar_veiculo():
     
     marca = veiculos_disp_venda[escolha][0]
 
-    valor_base = tabela_veiculos[marca]
+    valor_base = tabela_fipe[marca]
     valor_final = valor_base * 1.25
 
     print(f"Valor do caminhão escolhido : R$ {valor_final:.2f}")
@@ -154,7 +157,7 @@ while True:
         case "4":
             print(f"\nSaldo atual: R$ {cadastro_cliente['saldo_inicial']:.2f}")
         case "0":
-            print("Saindo do sistema. Até logo!")
+            print("Saindo do sistema... Até logo!")
             break  
         case _:
-            print("Opção inválida. Tente novamente.")
+            print("Opção inválida... Tente novamente.")
